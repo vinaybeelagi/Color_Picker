@@ -1,0 +1,94 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.header-section {
+    text-align: center;
+    padding: 20px;
+}
+.paragraph{
+    color: grey;
+}
+
+.main-section {
+    display: flex;
+    margin: 20px;
+    margin-left: 220px;
+    justify-content: center; /* Center the main container */
+    border: 2px solid grey; /* Set border color to grey on all sides */
+    border-radius: 14px; /* Apply border-radius to all corners */
+    padding: 50px; /* Reduce padding for the main container */
+    height: 400px; /* Reduce the height of the main container */
+    width: 70%; /* Reduce the width of the main container */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
+.left-container,
+.right-container {
+    height: 100%; /* Set height to 100% for both containers */
+}
+
+.left-container {
+    width: 25%; /* Reduce the width of the left container */
+    padding: 20px;
+    border-right: 2px solid grey; /* Set border color to grey on the left container */
+}
+
+.palette-section {
+    text-align: center;
+}
+
+.right-container {
+    width: 75%; /* Reduce the width of the right container */
+    position: relative; /* Position relative for absolute positioning */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.image-container {
+    text-align: center;
+
+    width: 100%;
+    height: 100%;
+    padding: 13px; /* Set max height to 100% */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    
+    background: #f7f7f8;
+}
+
+#selectedImage {
+    width: auto; /* Allow the image to adjust its width */
+    height: 100%; /* Increase the height of the selected image */
+    border-radius: 5px;
+    display: block; /* Ensure block-level display */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+.export-button {
+    background-color: #3498db; /* Blue color */
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+    width: 100%; /* Make the button full width */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/* Add the following style for the first button */
+.palette-section button {
+    background-color: #fff; /* White background color */
+    color: #3498db; /* Blue text color */
+    border: 1px solid #3498db; /* Blue border */
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+    width: 100%; /* Make the button full width */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
