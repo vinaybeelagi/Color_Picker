@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/vibrant.min.js"></script>
     <title>Image Picker</title>
 </head>
 <body>
-
     <section class="header-section">
         <h1 class="header-text">Image Picker</h1>
         <p class="paragraph">Extract beautiful palettes from your photos.</p>
@@ -17,21 +17,22 @@
         <div class="left-container">
             <div class="palette-section">
                 <p>Palette</p>
-                <div class="color-box"></div>
-                <input type="file" id="fileInput" style="display: none" accept="image/*">
+                <div class="color-palette"></div>
+                <button class="picker-button" id="add">+</button>
+                <button class="picker-button" id="remove">-</button>
                 <button class="browse-button">Browse Image</button>
                 <button class="export-button">Export Palette</button>
             </div>
         </div>
 
         <div class="right-container">
-            <div class="image-container">
-                <img src="/rainbow.jpg" alt="Selected Image" id="selectedImage">
+            <div class="image-container" id="imageContainer">
+                <img src="#" alt="Selected Image" id="selectedImage">
             </div>
         </div>
     </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/vibrant.min.js"></script>
+    <input type="file" id="fileInput" style="display: none;">
     <script src="script.js"></script>
 </body>
 </html>
