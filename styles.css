@@ -44,9 +44,10 @@ body {
 }
 
 .palette-section {
-    text-align: center;
+    text-align: left;
     border-radius: 20%;
     margin-bottom: 100px;
+    font-size: larger;
 }
 
 .color-picker {
@@ -61,6 +62,7 @@ border: none;
 .button-container-first {
     display: flex;
     flex-direction: column;
+    padding-left: 15px;
     
 }
 
@@ -137,7 +139,7 @@ border: none;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
+    width: 40%;
     height: 40%;
   }
 
@@ -146,6 +148,6 @@ border: none;
 .picker-button#remove {
     width: 20px; 
     padding-bottom: 0%;
-    margin: 1px;
+    margin: -1px;
 }
 
