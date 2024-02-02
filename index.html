@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/vibrant.min.js"></script>
     <title>Image Picker</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="header-section">
-        <h1 class="header-text">Image Picker</h1>
-        <p class="paragraph">Extract beautiful palettes from your photos.</p>
+      <h1 class="header-text">Image Picker</h1>
+      <p class="paragraph">Extract beautiful palettes from your photos.</p>
     </section>
 
     <section class="main-section">
-        <div class="left-container">
-            <div class="palette-section">
-                <p>Palette</p>
-                <div class="color-palette"></div>
-                <button class="picker-button" id="add">+</button>
-                <button class="picker-button" id="remove">-</button>
-                <button class="browse-button">Browse Image</button>
-                <button class="export-button">Export Palette</button>
+      <div class="left-container">
+        <div class="palette-section">
+          <p>Palette</p>
+          <div class="palette-controls">
+            <div class="color-palette"></div>
+            <div class="button-container-first">
+              <button class="picker-button" id="add">+</button>
+              <button class="picker-button" id="remove">-</button>
             </div>
+          </div>
         </div>
-
-        <div class="right-container">
-            <div class="image-container" id="imageContainer">
-                <img src="/rainbow.jpg" alt="Selected Image" id="selectedImage">
-            </div>
-        </div>
-    </section>
-    <div class="popup" id="myPopup">
-        <div class="popup-content">
-          <span class="close">&times;</span>
-          <h2>Export Palette</h2>
-          <div id="csvFormat"></div>
-          <div id="withHashFormat"></div>
-          <div id="arrayFormat"></div>
+        <div class="button-container">
+          <button class="browse-button">Browse Image</button>
+          <button class="export-button">Export Palette</button>
         </div>
       </div>
 
-    <input type="file" id="fileInput" style="display: none;">
+      <div class="right-container">
+        <div class="image-container" id="imageContainer">
+          <img src="/image.jpg" alt="Selected Image" id="selectedImage" />
+        </div>
+      </div>
+    </section>
+    <div class="popup" id="myPopup">
+      <div class="popup-content">
+        <span class="close">&times;</span>
+        <h2>Export Palette</h2>
+        <div id="csvFormat"></div>
+        <div id="withHashFormat"></div>
+        <div id="arrayFormat"></div>
+      </div>
+    </div>
+
+    <input type="file" id="fileInput" style="display: none" />
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

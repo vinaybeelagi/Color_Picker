@@ -51,6 +51,13 @@ function generateCSV() {
     const capitalizedPalette = palette.map(color => color.toUpperCase().replace('#', ''));
     return capitalizedPalette.join(',');
 }
+function generateWithHash() {
+    return palette.map(color => color.toUpperCase()).join(',');
+}
+
+function generateArray() {
+    return "[" + palette.map(color => "'" + color.toUpperCase().replace('#', '') + "'").join(', ') + "]";
+}
 
 exportBtn.addEventListener('click', () => {
     const csvContent = generateCSV();
@@ -75,10 +82,7 @@ exportBtn.addEventListener('click', () => {
     });
 });
 
-function generateWithHash() {
-    return palette.map(color => color.toUpperCase()).join(',');
-}
 
-function generateArray() {
-    return "[" + palette.map(color => "'" + color.toUpperCase().replace('#', '') + "'").join(', ') + "]";
-}
+
+
+
