@@ -1,153 +1,174 @@
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+#container {
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
 }
 
-.header-section {
-    text-align: center;
-    padding: 20px;
+#leftDiv {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
-.header-text {
-    font-size: xxx-large;
+#rightDiv {
+  width: 50%;
+  text-align: center;
 }
 
-.paragraph {
-    color: grey;
-    font-size: large;
+#colorPalette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  width: 300px;
+  border: 1px solid gray;
+  margin: 0px 5px;
+  height: 40px;
+  border-radius: 10px;
+  margin-left: 5%;
 }
 
-.main-section {
-    display: flex;
-    margin: 20px;
-    margin-left: 220px;
-    justify-content: center;
-    border: 2px solid grey;
-    border-radius: 14px;
-    padding: 50px;
-    height: 400px;
-    width: 70%;
-    box-sizing: border-box;
+#colorPalette div {
+  flex: 1;
+  width: 20px;
+  height: 40px;
+}
+#colorPalette div:first-child {
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
 }
 
-.left-container,
-.right-container {
-    height: 100%;
+#colorPalette div:last-child {
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
 }
 
-.left-container {
-    width: 40%;
-    padding: 20px;
-    border-right: 2px solid grey;
-}
-
-.palette-section {
-    text-align: left;
-    border-radius: 20%;
-    margin-bottom: 100px;
-    font-size: larger;
-}
-
-.color-picker {
-flex: 1;
-height: 40px;
-border: none;
-}
-.palette-controls {
-    display: flex;
-    
-}
-.button-container-first {
-    display: flex;
+#buttons {
+   display: flex;
     flex-direction: column;
-    padding-left: 15px;
-    
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  margin-bottom: 10px;
+  height: 35px;
 }
 
-.right-container {
-    width: 60%;
-    position: relative;
-    overflow: hidden;
+.add {
+  height: 20px;
+  width: 25px;
+  background-color: rgb(244, 249, 249);
+  border-radius: 25%;
+  margin-right: 5px;
 }
 
-.image-container {
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: #f7f7f8;
+.remove {
+  height: 20px;
+  width: 25px;
+  background-color:rgb(244, 249, 249);
+  border-radius: 25%;
 }
 
-#selectedImage {
-    width: auto;
-    height: 100%;
-    border-radius: 5px;
-    display: block;
-    margin: 0 auto;
+#canvasContainer {
+  position: relative;
+  border: 1px solid #ccc;
+  display: inline-block;
 }
 
-.export-button, .browse-button {
-    background-color: white;
-    border-radius: 5px;
-    margin-top: 10px;
-    padding: 10px;
-    cursor: pointer;
-    display: block;
-    width: 85%;
-    box-sizing: border-box;
+#imageCanvas {
+  display: block;
 }
 
-.picker-button {
-    margin-bottom: 10px;
-    font-size: smaller;
-    width: 10%;
+.colorPicker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  transition: transform 0.3s;
 }
 
-.export-button {
-    background-color: #3498db;
-    color: #fff;
+.activePicker {
+  transform: scale(1.6);
 }
 
-.color-palette {
-    width: 300px;
-    height: 40px;
-    border: 1px solid black;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    
-}
-.popup {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  .popup-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
-    height: 40%;
-  }
-
-
-.picker-button#add,
-.picker-button#remove {
-    width: 20px; 
-    padding-bottom: 0%;
-    margin: -1px;
+#browseImage {
+  width: 60%;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #e6eaf0;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-left: 10%;
+  margin-bottom: 5%;
+  text-align: center;
 }
 
+
+.export {
+  width: 70%;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin-left: 10%;
+  margin-bottom: 5%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+}
+
+.left-top {
+  display: flex;
+  margin-bottom: 20%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.activePaletteColor {
+  border: 2px solid white; /* You can adjust this border style */
+}

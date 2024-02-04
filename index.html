@@ -3,52 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/vibrant.min.js"></script>
-    <title>Image Picker</title>
+    <title>Image Picker App</title>
+    <link rel="stylesheet" href="test.css" />
+   
   </head>
   <body>
-    <section class="header-section">
-      <h1 class="header-text">Image Picker</h1>
-      <p class="paragraph">Extract beautiful palettes from your photos.</p>
-    </section>
-
-    <section class="main-section">
-      <div class="left-container">
-        <div class="palette-section">
-          <p>Palette</p>
-          <div class="palette-controls">
-            <div class="color-palette"></div>
-            <div class="button-container-first">
-              <button class="picker-button" id="add">+</button>
-              <button class="picker-button" id="remove">-</button>
-            </div>
-          </div>
-        </div>
-        <div class="button-container">
-          <button class="browse-button">Browse Image</button>
-          <button class="export-button">Export Palette</button>
+    <header style="text-align: center">
+      <h1>Image Picker</h1>
+      <p> Extract beautiful palettes from your photos</p>
+    </header>
+   
+    <div id="container">
+      <div id="leftDiv">
+      <div class="left-top">
+        <div id="colorPalette"></div>
+        <div id="buttons">
+          <button class="add" id="addColorPickerButton" onclick="addColorPicker()">
+            +
+          </button>
+          <button class="remove" id="removeColorPickerButton" onclick="removeColorPicker()">
+            -
+          </button>
         </div>
       </div>
-
-      <div class="right-container">
-        <div class="image-container" id="imageContainer">
-          <img src="image.jpg" alt="Selected Image" id="selectedImage" />
-        </div>
+        <label for="imageInput" id="browseImage">Browse Image</label>
+        <input
+          type="file"
+          id="imageInput"
+          accept="image/*"
+          style="display: none"
+        />
+        <button class="export" onclick="exportPalette()">Export Palette</button>
       </div>
-    </section>
-    <div class="popup" id="myPopup">
-      <div class="popup-content">
-        <span class="close">&times;</span>
-        <h2>Export Palette</h2>
-        <div id="csvFormat"></div>
-        <div id="withHashFormat"></div>
-        <div id="arrayFormat"></div>
+
+      <div id="rightDiv">
+        <div id="canvasContainer">
+          <canvas id="imageCanvas" width="400" height="300"></canvas>
+        </div>
       </div>
     </div>
-
-    <input type="file" id="fileInput" style="display: none" />
-    <script src="script.js"></script>
-    <!-- <script src="/test.js"></script> -->
-  </body>
-</html>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div id="csvFormat"></div>
+          <div id="withHashFormat"></div>
+          <div id="arrayFormat"></div>
+        </div>
+      </div>
+      <script src="test.js"></script>
+      </body>
+      </html>
