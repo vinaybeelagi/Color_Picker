@@ -3,22 +3,7 @@ const colorPaletteContainer = document.getElementById("colorPalette");
 const imageInput = document.getElementById("imageInput");
 let colorPickers = [];
 let hexValues = [];
-
 imageInput.addEventListener("change", handleImageUpload);
-const defaultImg = new Image();
-defaultImg.src = "./default_image.jpg";
-let initialLoad = true;
-defaultImg.onload = function() {
-  imageCanvas.getContext("2d").drawImage(defaultImg, 0, 0, imageCanvas.width, imageCanvas.height);
-  if (initialLoad) {
-    addColorPicker();
-    addColorPicker();
-    initialLoad = false; 
-  }
-}
-
-defaultImg.crossOrigin = "Anonymous";
-
 
 function handleImageUpload(event) {
   const file = event.target.files[0];
@@ -28,21 +13,25 @@ function handleImageUpload(event) {
 
     reader.onload = function (e) {
       const img = new Image();
-    
+
+      if (!e.target.result) {
+        img.src = "/default_image.jpg";
+      } else {
+        img.src = e.target.result;
+      }
 
       img.onload = function () {
         imageCanvas
           .getContext("2d")
           .drawImage(img, 0, 0, imageCanvas.width, imageCanvas.height);
-             };
-   
-      img.src = e.target.result;
+        addColorPicker();
+        addColorPicker();
+      };
     };
 
     reader.readAsDataURL(file);
-  } 
+  }
 }
-
 
 function addColorPicker() {
   if (colorPickers.length < 10) {
@@ -53,33 +42,27 @@ function addColorPicker() {
 
     colorPicker.addEventListener("mousedown", startDrag);
     colorPickers.push(colorPicker);
-    // console.log(colorPickers);
     updateColorPalette();
     document.getElementById("canvasContainer").appendChild(colorPicker);
     addActivePicker(colorPicker);
 
-  
     if (colorPickers.length === 10) {
-    
       document.getElementById("addColorPickerButton").disabled = true;
     }
   } else {
-    document.getElementById("addColorPickerButton").disabled = false;
+    // Show a message indicating that the maximum number of color pickers has been reached
   }
 }
 
 function removeColorPicker() {
   if (colorPickers.length > 2) {
-   
     const removedPicker = colorPickers.pop();
     removedPicker.remove();
-
     hexValues.pop();
     updateColorPalette();
-   
     document.getElementById("addColorPickerButton").disabled = false;
   } else {
-    document.getElementById("removeColorPickerButton").disabled = true;
+    // Disable the button or show a message indicating that at least two color pickers must be present
   }
 }
 
@@ -95,14 +78,14 @@ function startDrag(event) {
     const colorPickerLeft =
       constrainValue(x, 0, imageCanvas.width - colorPicker.offsetWidth) + "px";
     const colorPickerTop =
-      constrainValue(y, 0, imageCanvas.height - colorPicker.offsetHeight) +
-      "px";
+      constrainValue(y, 0, imageCanvas.height - colorPicker.offsetHeight) + "px";
     const color = getColorAtPosition(colorPickerLeft, colorPickerTop);
     colorPicker.style.left = colorPickerLeft;
     colorPicker.style.top = colorPickerTop;
     colorPicker.style.backgroundColor = color;
     updateColorPalette();
   }
+
   function handleDragEnd() {
     document.removeEventListener("mousemove", handleDragMove);
     document.removeEventListener("mouseup", handleDragEnd);
@@ -111,14 +94,16 @@ function startDrag(event) {
   document.addEventListener("mousemove", handleDragMove);
   document.addEventListener("mouseup", handleDragEnd);
 }
+
 function updateColorPalette() {
   colorPaletteContainer.innerHTML = "";
   hexValues = [];
-  // hexValues.forEach((color) => {
-  //   const colorDiv = document.createElement("div");
-  //   colorDiv.style.backgroundColor = color;
-  //   colorPaletteContainer.appendChild(colorDiv); 
-  // });
+  hexValues.forEach((color) => {
+    const colorDiv = document.createElement("div");
+    colorDiv.style.backgroundColor = color;
+    colorPaletteContainer.appendChild(colorDiv);
+  });
+
   colorPickers.forEach((colorPicker) => {
     const color = getColorAtPosition(
       colorPicker.style.left,
@@ -129,54 +114,63 @@ function updateColorPalette() {
     colorPaletteContainer.appendChild(colorDiv);
     hexValues.push(color);
   });
-  console.log(hexValues);
 }
+
 function getColorAtPosition(x, y) {
   const imageData = imageCanvas
     .getContext("2d")
     .getImageData(parseInt(x), parseInt(y), 1, 1).data;
   const hexColor = rgbToHex(imageData[0], imageData[1], imageData[2]);
-  
   return hexColor;
 }
+
 function exportPalette() {
-  var modal = document.getElementById("myModal");
-  var span = document.getElementsByClassName("close")[0];
+  const modal = document.getElementById("myModal");
+  const span = document.getElementsByClassName("close")[0];
+
   modal.style.display = "block";
-  var csvFormat = generateCSV();
+
+  const csvFormat = generateCSV();
   document.getElementById("csvFormat").innerText = "CSV\n" + csvFormat;
-  var withHashFormat = generateWithHash();
-  document.getElementById("withHashFormat").innerText =
-    "With #\n" + withHashFormat;
-  var arrayFormat = generateArray();
+
+  const withHashFormat = generateWithHash();
+  document.getElementById("withHashFormat").innerText = "With #\n" + withHashFormat;
+
+  const arrayFormat = generateArray();
   document.getElementById("arrayFormat").innerText = "Array\n" + arrayFormat;
-  function generateCSV() {
-    const capitalizedPalette = hexValues.map((color) =>
-      color.toUpperCase().replace("#", "")
-    );
-    return capitalizedPalette.join(",");
-  }
-  function generateWithHash() {
-    return hexValues.map((color) => color.toUpperCase()).join(", ");
-  }
-  function generateArray() {
-    return (
-      "[" +
-      hexValues
-        .map((color) => "'" + color.toUpperCase().replace("#", "") + "'")
-        .join(", ") +
-      "]"
-    );
-  }
+
   span.onclick = function () {
     modal.style.display = "none";
   };
+
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
   };
 }
+
+function generateCSV() {
+  const capitalizedPalette = hexValues.map((color) =>
+    color.toUpperCase().replace("#", "")
+  );
+  return capitalizedPalette.join(",");
+}
+
+function generateWithHash() {
+  return hexValues.map((color) => color.toUpperCase()).join(", ");
+}
+
+function generateArray() {
+  return (
+    "[" +
+    hexValues
+      .map((color) => "'" + color.toUpperCase().replace("#", "") + "'")
+      .join(", ") +
+    "]"
+  );
+}
+
 function rgbToHex(r, g, b) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
@@ -205,15 +199,4 @@ function addActivePicker(colorPicker) {
     colorPicker.style.top
   );
   colorPicker.style.backgroundColor = color;
-  
-  // Highlight the corresponding color in the palette
-  const colorIndex = hexValues.indexOf(color);
-  const paletteColors = document.querySelectorAll("#colorPalette div");
-  paletteColors.forEach((paletteColor, index) => {
-    if (index === colorIndex) {
-      paletteColor.classList.add("activePaletteColor");
-    } else {
-      paletteColor.classList.remove("activePaletteColor");
-    }
-  });
 }
